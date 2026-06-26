@@ -1,22 +1,1367 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
+<head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
-    <title>CocinaEnCasa - 126 Recetas del Mundo | Gastronomía Internacional 2026</title>
-    <meta name="description" content="Descubre 126 recetas auténticas de 18 países: Argentina, Perú, México, España, Japón y más. Ingredientes y preparación paso a paso. La mejor cocina internacional en casa." />
-    <meta name="keywords" content="recetas del mundo, cocina internacional, recetas tradicionales, gastronomía, cocina en casa 2026" />
-    <meta name="robots" content="index, follow" />
-    <meta property="og:title" content="CocinaEnCasa - 126 Recetas del Mundo | Gastronomía Internacional 2026" />
-    <meta property="og:description" content="Descubre 126 recetas auténticas de 18 países: Argentina, Perú, México, España, Japón y más. Ingredientes y preparación paso a paso. La mejor cocina internacional en casa." />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="CocinaEnCasa - 126 Recetas del Mundo | Gastronomía Internacional 2026" />
-    <meta name="twitter:description" content="Descubre 126 recetas auténticas de 18 países: Argentina, Perú, México, España, Japón y más. Ingredientes y preparación paso a paso. La mejor cocina internacional en casa." />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  </head>
-  <body class="dark">
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>sportMlb2026 | MLB en vivo</title>
+    <meta name="description" content="sportMlb2026: MLB en vivo, posiciones, líderes de bateo y pitcheo." />
+
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self';
+        script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://statsapi.mlb.com;
+        style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com;
+        img-src 'self' data: https://www.mlbstatic.com https://*.mlbstatic.com;
+        frame-src https://www.youtube.com;
+        connect-src 'self' https://statsapi.mlb.com;
+        base-uri 'self';
+        form-action 'self';
+    " />
+
+    <link rel="preconnect" href="https://statsapi.mlb.com" />
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        mlbAzul: '#0a1e3c',
+                        azul: '#1a56db',
+                        azulClaro: '#3b82f6',
+                        rojoVivo: '#dc2626',
+                        gris: '#475569',
+                        grisClaro: '#f1f5f9',
+                        verdeBase: '#22c55e',
+                        oro: '#fbbf24',
+                        morado: '#7c3aed',
+                    },
+                    fontFamily: { sans: ['Inter', 'Segoe UI', 'Roboto', 'Arial', 'sans-serif'] },
+                }
+            }
+        }
+    </script>
+
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            background: linear-gradient(145deg, #f8fafc 0%, #eef2f6 100%);
+            font-family: 'Inter', 'Segoe UI', 'Roboto', sans-serif;
+            min-height: 100vh;
+            transition: background 0.5s ease;
+        }
+        .dark body {
+            background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%);
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+        }
+        .dark .glass {
+            background: rgba(30, 41, 59, 0.8);
+            border-color: rgba(255, 255, 255, 0.06);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+        }
+        .dark .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            border-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .animate-float { animation: float 3s ease-in-out infinite; }
+        @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+
+        .spinner {
+            border: 3px solid rgba(0,0,0,0.06);
+            border-top-color: #1a56db;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            animation: spin 0.7s linear infinite;
+            margin: 20px auto;
+        }
+        .dark .spinner { border-color: rgba(255,255,255,0.06); border-top-color: #3b82f6; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .tabla-lideres th {
+            background: #f1f5f9;
+            font-weight: 600;
+            padding: 6px 8px;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            text-align: center;
+        }
+        .dark .tabla-lideres th { background: #1e293b; }
+        .tabla-lideres td { padding: 6px 8px; border-bottom: 1px solid #e2e8f0; text-align: center; }
+        .dark .tabla-lideres td { border-color: #334155; }
+        .tabla-lideres tr:hover td { background: #f8fafc; }
+        .dark .tabla-lideres tr:hover td { background: #1e293b; }
+        .tabla-lideres .ranking { font-weight: 700; color: #1a56db; }
+        .dark .tabla-lideres .ranking { color: #60a5fa; }
+
+        .seccion { display: none; }
+        .seccion.activa { display: block; }
+
+        .tab-link, .tab-link-movil {
+            cursor: pointer;
+            transition: all 0.2s;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.85rem;
+        }
+        .tab-link.active, .tab-link-movil.active {
+            background: #1a56db;
+            color: white;
+            box-shadow: 0 4px 12px rgba(26,86,219,0.3);
+        }
+        .dark .tab-link.active, .dark .tab-link-movil.active {
+            background: #2563eb;
+        }
+        .tab-link-movil {
+            font-size: 0.65rem;
+            padding: 4px 10px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .tab-link-movil .icono { font-size: 1rem; }
+        @media (max-width: 480px) { .tab-link-movil .etiqueta { display: none; } .tab-link-movil .icono { font-size: 1.2rem; } }
+
+        .sub-tab-link {
+            cursor: pointer;
+            transition: all 0.2s;
+            padding: 4px 14px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+        .sub-tab-link:hover { background: #e2e8f0; }
+        .dark .sub-tab-link:hover { background: #334155; }
+        .sub-tab-link.active { background: #1a56db; color: white; }
+        .dark .sub-tab-link.active { background: #3b82f6; }
+        .sub-contenido { display: none; }
+        .sub-contenido.activo { display: block; }
+        .stats-contenido { display: none; }
+        .stats-contenido.activo { display: block; }
+
+        .theme-toggle { cursor: pointer; display: flex; align-items: center; gap: 8px; }
+        .theme-toggle input { display: none; }
+        .theme-toggle .slider {
+            width: 42px;
+            height: 24px;
+            background: #cbd5e1;
+            border-radius: 999px;
+            position: relative;
+            transition: background 0.3s;
+        }
+        .theme-toggle .slider::after {
+            content: '🌙';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s, background 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+        }
+        .dark .theme-toggle .slider { background: #1a56db; }
+        .dark .theme-toggle .slider::after { transform: translateX(18px); content: '☀️'; background: #fbbf24; }
+
+        .btn-recargar {
+            background: linear-gradient(135deg, #1a56db, #2563eb);
+            color: white;
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.25s;
+            border: none;
+            box-shadow: 0 2px 8px rgba(26,86,219,0.25);
+        }
+        .btn-recargar:hover { transform: scale(1.04); }
+        .dark .btn-recargar { background: linear-gradient(135deg, #3b82f6, #60a5fa); }
+
+        .division-titulo {
+            background: linear-gradient(to right, #e2e8f0, #f1f5f9);
+            font-weight: 700;
+            padding: 6px 12px;
+            margin-top: 12px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-radius: 4px;
+        }
+        .dark .division-titulo {
+            background: linear-gradient(to right, #1e293b, #334155);
+            color: #e2e8f0;
+        }
+        .tabla-posiciones th {
+            background: #f1f5f9;
+            font-weight: 600;
+            padding: 6px 8px;
+            text-transform: uppercase;
+            font-size: 0.65rem;
+        }
+        .dark .tabla-posiciones th { background: #1e293b; }
+        .tabla-posiciones td { padding: 6px 8px; border-bottom: 1px solid #e2e8f0; }
+        .dark .tabla-posiciones td { border-color: #334155; }
+        .tabla-posiciones tr:hover td { background: #f8fafc; }
+        .dark .tabla-posiciones tr:hover td { background: #1e293b; }
+
+        .playoff-indicador {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 4px;
+        }
+        .playoff-indicador.lider { background: #22c55e; box-shadow: 0 0 8px #22c55e66; }
+        .playoff-indicador.wildcard { background: #fbbf24; box-shadow: 0 0 8px #fbbf2466; }
+        .playoff-indicador.eliminado { background: #94a3b8; }
+
+        .grid-entradas { display: grid; grid-template-columns: repeat(9, 1.6rem) 2rem 2rem 2rem; gap: 2px; }
+        .grid-entradas > span { text-align: center; display: flex; align-items: center; justify-content: center; padding: 2px 0; }
+        @media (max-width: 480px) { .grid-entradas { grid-template-columns: repeat(9, 1.1rem) 1.5rem 1.5rem 1.5rem; font-size: 0.6rem; } }
+
+        .diamante-base {
+            width: 14px; height: 14px; transform: rotate(45deg);
+            border: 1.5px solid #94a3b8; transition: 0.25s;
+        }
+        .diamante-base.ocupada { background: #22c55e; border-color: #16a34a; box-shadow: 0 0 12px rgba(34,197,94,0.5); }
+        .diamante-base.vacia { background: #e2e8f0; border-color: #cbd5e1; }
+        .diamante-base.plato { background: #94a3b8; border-color: #64748b; }
+
+        .noticia-card {
+            border-left: 4px solid #1a56db;
+            transition: all 0.2s;
+        }
+        .noticia-card:hover { transform: translateX(4px); }
+        .dark .noticia-card { border-left-color: #3b82f6; }
+        .noticia-card .fecha { font-size: 0.6rem; color: #64748b; }
+        .dark .noticia-card .fecha { color: #94a3b8; }
+        .noticia-card .categoria {
+            font-size: 0.55rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background: #e2e8f0;
+            padding: 2px 10px;
+            border-radius: 12px;
+            display: inline-block;
+            font-weight: 600;
+        }
+        .dark .noticia-card .categoria { background: #334155; color: #e2e8f0; }
+
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        .dark ::-webkit-scrollbar-thumb { background: #475569; }
+
+        /* Estilo para los logos en jugadores */
+        .team-logo-jugador {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== CABECERA ===== -->
+    <header class="sticky top-0 z-50 glass border-b border-white/20 dark:border-gray-700/30">
+        <div class="max-w-5xl mx-auto px-3 py-2 flex items-center justify-between flex-wrap gap-2">
+            <div class="flex items-center gap-2">
+                <span class="text-3xl animate-float">⚾</span>
+                <div>
+                    <h1 class="font-extrabold text-xl tracking-tight text-mlbAzul dark:text-white">
+                        sport<span class="text-azul dark:text-azulClaro">Mlb</span><span class="text-sm font-normal text-gris/60 dark:text-gray-400">2026</span>
+                    </h1>
+                    <span class="text-[0.55rem] font-semibold uppercase tracking-widest text-gris/60 dark:text-gray-500">MLB en vivo</span>
+                </div>
+            </div>
+
+            <nav class="hidden md:flex gap-1 text-sm font-medium" id="menuPrincipal">
+                <span class="tab-link active" data-seccion="inicio">Inicio</span>
+                <span class="tab-link" data-seccion="calendario">Calendario</span>
+                <span class="tab-link" data-seccion="posiciones">Posiciones</span>
+                <span class="tab-link" data-seccion="jugadores">Jugadores</span>
+                <span class="tab-link" data-seccion="equipos">Equipos</span>
+                <span class="tab-link" data-seccion="playoffs">Playoffs</span>
+                <span class="tab-link" data-seccion="estadisticas">Estadísticas</span>
+                <span class="tab-link" data-seccion="noticias">Noticias</span>
+                <span class="tab-link" data-seccion="transmision">🔴 Transmisión</span>
+            </nav>
+
+            <div class="flex items-center gap-3">
+                <div class="hidden sm:flex items-center bg-white/50 dark:bg-gray-800/50 rounded-full px-3 py-1 border border-white/20 dark:border-gray-700/30">
+                    <input type="text" id="busquedaGlobal" placeholder="Buscar..." class="bg-transparent border-none outline-none text-xs w-24 md:w-32 dark:text-gray-200 placeholder:text-gray-400">
+                    <span class="text-gray-400 text-sm">🔍</span>
+                </div>
+                <label class="theme-toggle"><input type="checkbox" id="themeCheckbox"><span class="slider"></span></label>
+                <button id="btnSeguridad" class="text-sm text-gris/70 dark:text-gray-400 hover:text-azul transition">🔒</button>
+            </div>
+        </div>
+        <div class="md:hidden flex flex-wrap justify-center gap-1 px-2 pb-2 border-t border-white/10 dark:border-gray-700/30 pt-2" id="menuMovil">
+            <span class="tab-link-movil active" data-seccion="inicio"><span class="icono">🏠</span><span class="etiqueta">Inicio</span></span>
+            <span class="tab-link-movil" data-seccion="calendario"><span class="icono">📅</span><span class="etiqueta">Calendario</span></span>
+            <span class="tab-link-movil" data-seccion="posiciones"><span class="icono">🏆</span><span class="etiqueta">Posiciones</span></span>
+            <span class="tab-link-movil" data-seccion="jugadores"><span class="icono">👤</span><span class="etiqueta">Jugadores</span></span>
+            <span class="tab-link-movil" data-seccion="equipos"><span class="icono">🏟️</span><span class="etiqueta">Equipos</span></span>
+            <span class="tab-link-movil" data-seccion="playoffs"><span class="icono">🏅</span><span class="etiqueta">Playoffs</span></span>
+            <span class="tab-link-movil" data-seccion="estadisticas"><span class="icono">📊</span><span class="etiqueta">Estadísticas</span></span>
+            <span class="tab-link-movil" data-seccion="noticias"><span class="icono">📰</span><span class="etiqueta">Noticias</span></span>
+            <span class="tab-link-movil" data-seccion="transmision"><span class="icono">🔴</span><span class="etiqueta">Transmisión</span></span>
+        </div>
+    </header>
+
+    <!-- ===== CONTENIDO PRINCIPAL ===== -->
+    <main class="max-w-5xl mx-auto px-3 py-4">
+
+        <div class="flex items-center justify-between text-xs mb-4">
+            <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_#22c55e]"></span>
+                <span class="dark:text-gray-400">Actualizado • Lima (UTC‑5) • Temporada 2026</span>
+            </div>
+            <div class="flex gap-2 text-gray-400 dark:text-gray-500">
+                <span>⚡ Datos manuales</span>
+                <span class="hidden sm:inline">•</span>
+                <span class="hidden sm:inline">v3.0</span>
+            </div>
+        </div>
+
+        <!-- ===== INICIO ===== -->
+        <section id="seccion-inicio" class="seccion activa">
+            <div class="relative rounded-2xl overflow-hidden mb-6 glass-card p-6 md:p-8">
+                <div class="absolute inset-0 bg-gradient-to-r from-azul/10 via-morado/5 to-transparent"></div>
+                <div class="relative z-10">
+                    <h2 class="text-2xl md:text-3xl font-bold text-mlbAzul dark:text-white">⚡ Hoy en la <span class="shimmer-text" style="background:linear-gradient(90deg,#1a56db,#7c3aed,#1a56db);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;">MLB</span></h2>
+                    <p class="text-gris/70 dark:text-gray-400 text-sm mt-1">Resultados en vivo, estadísticas y más.</p>
+                </div>
+            </div>
+            <div class="flex items-center justify-center gap-2 glass-card rounded-xl py-2 px-3 mb-6">
+                <button onclick="window.cambiarFecha(-1)" class="text-lg px-3 py-1 rounded-lg hover:bg-white/50 dark:hover:bg-gray-700/50 transition">‹</button>
+                <div id="selector-fechas" class="flex gap-2 text-sm font-medium"></div>
+                <button onclick="window.cambiarFecha(1)" class="text-lg px-3 py-1 rounded-lg hover:bg-white/50 dark:hover:bg-gray-700/50 transition">›</button>
+            </div>
+            <div id="lista-partidos" class="space-y-5 mb-8"><div class="flex justify-center py-10"><div class="spinner"></div></div></div>
+            <div class="mt-8">
+                <h3 class="text-xl font-bold text-mlbAzul border-l-4 border-azul pl-3 mb-4 dark:text-white">🎥 Destacados MLB</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div class="glass-card rounded-xl overflow-hidden">
+                        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;background:#000;">
+                            <iframe src="https://www.youtube.com/embed/P5hOMfdFv8Y?si=_yl2u_0CiEAscwFq" title="MLB Highlights" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy" style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+                        </div>
+                        <div class="p-3"><p class="text-sm font-semibold dark:text-white">⚾ Resumen de la jornada</p><p class="text-xs text-gray-500 dark:text-gray-400">Lo mejor del día.</p></div>
+                    </div>
+                    <div class="glass-card rounded-xl overflow-hidden">
+                        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;background:#000;">
+                            <iframe src="https://www.youtube.com/embed/f5YBfDI-CnM?si=i3OMDqU2aEP7LdrM" title="MLB Highlights 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy" style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+                        </div>
+                        <div class="p-3"><p class="text-sm font-semibold dark:text-white">⚾ Mejores jugadas de la semana</p><p class="text-xs text-gray-500 dark:text-gray-400">Los momentos más espectaculares.</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== CALENDARIO ===== -->
+        <section id="seccion-calendario" class="seccion">
+            <h2 class="text-2xl font-bold text-mlbAzul border-l-4 border-azul pl-3 mb-5 dark:text-white">📅 Calendario de partidos</h2>
+            <div class="glass-card rounded-xl p-5">
+                <div class="flex items-center justify-center gap-2 mb-4">
+                    <button onclick="window.cambiarFechaCalendario(-1)" class="text-lg px-3 py-1 rounded-lg hover:bg-white/50 dark:hover:bg-gray-700/50 transition">‹</button>
+                    <div id="selector-fechas-calendario" class="flex gap-2 text-sm font-medium"></div>
+                    <button onclick="window.cambiarFechaCalendario(1)" class="text-lg px-3 py-1 rounded-lg hover:bg-white/50 dark:hover:bg-gray-700/50 transition">›</button>
+                </div>
+                <div class="flex justify-center gap-4 flex-wrap mb-4">
+                    <button onclick="window.irFechaCalendario(window.obtenerFechaHoy())" class="btn-recargar">Hoy</button>
+                    <button onclick="window.cambiarFechaCalendario(1)" class="btn-recargar" style="background:linear-gradient(135deg,#7c3aed,#8b5cf6);">Mañana</button>
+                </div>
+                <div id="lista-partidos-calendario" class="space-y-4"><div class="flex justify-center py-10"><div class="spinner"></div></div></div>
+            </div>
+        </section>
+
+        <!-- ===== POSICIONES ===== -->
+        <section id="seccion-posiciones" class="seccion">
+            <h2 class="text-2xl font-bold text-mlbAzul border-l-4 border-azul pl-3 mb-5 dark:text-white">📊 Posiciones de equipos</h2>
+            <div id="contenedor-posiciones" class="space-y-6"><div class="flex justify-center py-10"><div class="spinner"></div></div></div>
+        </section>
+
+        <!-- ===== JUGADORES ===== -->
+        <section id="seccion-jugadores" class="seccion">
+            <h2 class="text-2xl font-bold text-mlbAzul border-l-4 border-azul pl-3 mb-5 dark:text-white">👤 Jugadores destacados</h2>
+            <div class="glass-card rounded-xl p-5">
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <button class="sub-tab-link active" data-jugador="bateo">🏏 Bateo</button>
+                    <button class="sub-tab-link" data-jugador="pitcheo">⛽ Pitcheo</button>
+                </div>
+                <div id="contenedor-jugadores"><div class="spinner"></div></div>
+            </div>
+        </section>
+
+        <!-- ===== EQUIPOS ===== -->
+        <section id="seccion-equipos" class="seccion">
+            <h2 class="text-2xl font-bold text-mlbAzul border-l-4 border-azul pl-3 mb-5 dark:text-white">🏟️ Equipos MLB</h2>
+            <div class="glass-card rounded-xl p-5">
+                <div id="contenedor-equipos"><div class="spinner"></div></div>
+            </div>
+        </section>
+
+        <!-- ===== PLAYOFFS ===== -->
+        <section id="seccion-playoffs" class="seccion">
+            <h2 class="text-2xl font-bold text-mlbAzul border-l-4 border-azul pl-3 mb-5 dark:text-white">🏅 Playoffs 2026</h2>
+            <div class="glass-card rounded-xl p-5">
+                <div class="flex items-center justify-between flex-wrap gap-3 mb-4">
+                    <span class="text-sm font-medium dark:text-white">⚔️ Clasificación por divisiones</span>
+                    <span class="text-xs bg-oro/20 text-oro px-3 py-1 rounded-full font-bold">🔥 Wild Card</span>
+                </div>
+                <div id="contenedor-playoffs"><div class="spinner"></div></div>
+                <p class="text-center text-xs text-gray-400 dark:text-gray-500 mt-4">* Datos actualizados desde la API oficial de MLB</p>
+            </div>
+        </section>
+
+        <!-- ===== ESTADÍSTICAS ===== -->
+        <section id="seccion-estadisticas" class="seccion">
+            <h2 class="text-2xl font-bold text-mlbAzul border-l-4 border-azul pl-3 mb-5 dark:text-white">📈 Líderes de bateo y pitcheo 2026</h2>
+            <div class="glass-card rounded-xl p-5">
+                <div class="flex gap-2 text-sm font-medium mb-4 flex-wrap items-center border-b border-white/20 dark:border-gray-700/30 pb-3">
+                    <span class="tab-link-stats active px-4 py-1.5 rounded-lg cursor-pointer bg-azul text-white shadow-md" data-tab="bateo">Bateo</span>
+                    <span class="tab-link-stats px-4 py-1.5 rounded-lg cursor-pointer hover:bg-white/30 dark:hover:bg-gray-700/30 transition" data-tab="pitcheo">Pitcheo</span>
+                </div>
+                <!-- Bateo -->
+                <div id="stats-bateo" class="stats-contenido activo">
+                    <div class="flex flex-wrap gap-1 mb-3 text-xs">
+                        <span class="sub-tab-link active" data-sub="avg">Promedio</span>
+                        <span class="sub-tab-link" data-sub="hr">Cuadrangulares</span>
+                        <span class="sub-tab-link" data-sub="rbi">Empujadas</span>
+                        <span class="sub-tab-link" data-sub="hits">Hits</span>
+                        <span class="sub-tab-link" data-sub="sb">Bases robadas</span>
+                    </div>
+                    <div id="sub-avg" class="sub-contenido activo"><div class="spinner"></div></div>
+                    <div id="sub-hr" class="sub-contenido"><div class="spinner"></div></div>
+                    <div id="sub-rbi" class="sub-contenido"><div class="spinner"></div></div>
+                    <div id="sub-hits" class="sub-contenido"><div class="spinner"></div></div>
+                    <div id="sub-sb" class="sub-contenido"><div class="spinner"></div></div>
+                </div>
+                <!-- Pitcheo -->
+                <div id="stats-pitcheo" class="stats-contenido" style="display:none;">
+                    <div class="flex flex-wrap gap-1 mb-3 text-xs">
+                        <span class="sub-tab-link active" data-sub="era">Efectividad</span>
+                        <span class="sub-tab-link" data-sub="sv">Salvamentos</span>
+                        <span class="sub-tab-link" data-sub="k">Ponches</span>
+                        <span class="sub-tab-link" data-sub="w">Juegos ganados</span>
+                        <span class="sub-tab-link" data-sub="qs">Salidas de calidad</span>
+                    </div>
+                    <div id="sub-era" class="sub-contenido activo"><div class="spinner"></div></div>
+                    <div id="sub-sv" class="sub-contenido"><div class="spinner"></div></div>
+                    <div id="sub-k" class="sub-contenido"><div class="spinner"></div></div>
+                    <div id="sub-w" class="sub-contenido"><div class="spinner"></div></div>
+                    <div id="sub-qs" class="sub-contenido"><div class="spinner"></div></div>
+                </div>
+                <p class="text-center text-xs text-gray-400 dark:text-gray-500 mt-4">* Datos actualizados de la temporada 2026</p>
+            </div>
+        </section>
+
+        <!-- ===== NOTICIAS ===== -->
+        <section id="seccion-noticias" class="seccion">
+            <h2 class="text-2xl font-bold text-mlbAzul border-l-4 border-azul pl-3 mb-5 dark:text-white">📰 Noticias MLB</h2>
+            <div id="contenedor-noticias" class="space-y-4">
+                <div class="flex justify-center py-10"><div class="spinner"></div></div>
+            </div>
+        </section>
+
+        <!-- ===== TRANSMISIÓN ===== -->
+        <section id="seccion-transmision" class="seccion">
+            <h2 class="text-2xl font-bold text-mlbAzul border-l-4 border-azul pl-3 mb-5 dark:text-white">🔴 Transmisión en vivo</h2>
+            <div class="glass-card rounded-xl p-5">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="w-3 h-3 rounded-full bg-rojoVivo animate-pulse-ring" style="animation:pulse-ring 2s infinite;"></span>
+                    <span class="font-semibold dark:text-white">MLB Network — En vivo ahora</span>
+                </div>
+                <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;background:#000;border-radius:12px;">
+                    <iframe src="https://www.youtube.com/embed/P5hOMfdFv8Y?si=_yl2u_0CiEAscwFq&autoplay=1&mute=1" title="MLB En Vivo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy" style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+                </div>
+                <p class="text-xs text-gray-500 dark:text-gray-400 mt-3 text-center">⚡ Transmisión oficial de la MLB • Sujeto a disponibilidad regional</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===== PIE ===== -->
+    <footer class="glass border-t border-white/20 dark:border-gray-700/30 py-6 mt-12 text-center text-xs">
+        <div class="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <p class="dark:text-gray-300">© 2026 <strong class="text-mlbAzul dark:text-white">sport<span class="text-azul dark:text-azulClaro">Mlb</span>2026</strong> <span class="text-gray-400 dark:text-gray-500">• Datos MLB 2026</span></p>
+            <p class="text-gray-500 dark:text-gray-400 flex items-center gap-1"><span>🔒</span> Seguro y privado</p>
+            <div class="flex gap-5 text-gray-500 dark:text-gray-400">
+                <a href="#" class="hover:text-azul transition">Twitter</a>
+                <a href="#" class="hover:text-azul transition">Instagram</a>
+                <a href="#" class="hover:text-azul transition">YouTube</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================================ -->
+    <!-- JAVASCRIPT COMPLETO - CON LOGOS DE EQUIPOS                   -->
+    <!-- ============================================================ -->
+    <script>
+        (function() {
+            'use strict';
+
+            // ============================================================
+            // 1. SEGURIDAD
+            // ============================================================
+            function sanitizar(texto) {
+                if (!texto) return '';
+                const temp = document.createElement('div');
+                temp.textContent = texto;
+                return temp.innerHTML;
+            }
+            function escaparHTML(str) {
+                if (!str) return '';
+                return str.replace(/[&<>"']/g, function(m) {
+                    if (m === '&') return '&amp;';
+                    if (m === '<') return '&lt;';
+                    if (m === '>') return '&gt;';
+                    if (m === '"') return '&quot;';
+                    if (m === "'") return '&#039;';
+                    return m;
+                });
+            }
+
+            // ============================================================
+            // 2. MODO OSCURO
+            // ============================================================
+            const themeCheckbox = document.getElementById('themeCheckbox');
+            if (localStorage.getItem('theme') === 'dark') {
+                document.documentElement.classList.add('dark');
+                themeCheckbox.checked = true;
+            }
+            themeCheckbox.addEventListener('change', function() {
+                if (this.checked) {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('theme', 'light');
+                }
+            });
+
+            // ============================================================
+            // 3. NAVEGACIÓN
+            // ============================================================
+            const secciones = document.querySelectorAll('.seccion');
+            const tabLinks = document.querySelectorAll('.tab-link, .tab-link-movil');
+
+            function mostrarSeccion(id) {
+                secciones.forEach(sec => sec.classList.remove('activa'));
+                const activa = document.getElementById('seccion-' + id);
+                if (activa) activa.classList.add('activa');
+                tabLinks.forEach(tab => tab.classList.remove('active'));
+                document.querySelectorAll(`.tab-link[data-seccion="${id}"], .tab-link-movil[data-seccion="${id}"]`)
+                    .forEach(tab => tab.classList.add('active'));
+
+                if (id === 'posiciones') window.cargarPosicionesAPI();
+                if (id === 'estadisticas') window.cargarEstadisticasManual();
+                if (id === 'jugadores') window.cargarJugadoresManual();
+                if (id === 'equipos') window.cargarEquiposMLB();
+                if (id === 'playoffs') window.cargarPlayoffs();
+                if (id === 'noticias') window.cargarNoticiasManual();
+                if (id === 'calendario') {
+                    window.mostrarFechasCalendario();
+                    window.cargarPartidosCalendario(window.obtenerFechaHoy());
+                }
+            }
+
+            tabLinks.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const id = this.dataset.seccion;
+                    if (id) mostrarSeccion(id);
+                });
+            });
+
+            // ============================================================
+            // 4. PESTAÑAS ESTADÍSTICAS
+            // ============================================================
+            const statsTabs = document.querySelectorAll('.tab-link-stats');
+            statsTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const target = this.dataset.tab;
+                    statsTabs.forEach(t => {
+                        t.classList.remove('active', 'bg-azul', 'text-white', 'shadow-md');
+                        t.classList.add('hover:bg-white/30', 'dark:hover:bg-gray-700/30');
+                    });
+                    this.classList.add('active', 'bg-azul', 'text-white', 'shadow-md');
+                    this.classList.remove('hover:bg-white/30', 'dark:hover:bg-gray-700/30');
+                    document.querySelectorAll('.stats-contenido').forEach(el => el.classList.remove('activo'));
+                    const cont = document.getElementById('stats-' + target);
+                    if (cont) cont.classList.add('activo');
+                    const primeraSub = cont.querySelector('.sub-tab-link');
+                    if (primeraSub) primeraSub.click();
+                });
+            });
+
+            document.querySelectorAll('.sub-tab-link').forEach(sub => {
+                sub.addEventListener('click', function() {
+                    const parent = this.closest('.stats-contenido');
+                    if (!parent) return;
+                    parent.querySelectorAll('.sub-tab-link').forEach(t => {
+                        t.classList.remove('active');
+                        t.classList.add('hover:bg-white/30', 'dark:hover:bg-gray-700/30');
+                    });
+                    this.classList.add('active');
+                    this.classList.remove('hover:bg-white/30', 'dark:hover:bg-gray-700/30');
+                    parent.querySelectorAll('.sub-contenido').forEach(el => el.classList.remove('activo'));
+                    const targetId = 'sub-' + this.dataset.sub;
+                    const targetEl = parent.querySelector('#' + targetId);
+                    if (targetEl) {
+                        targetEl.classList.add('activo');
+                        window.cargarEstadisticasManual();
+                    }
+                });
+            });
+
+            // ============================================================
+            // 5. DATOS MANUALES DE ESTADÍSTICAS - TEMPORADA 2026
+            // ============================================================
+            const datosBateo = {
+                avg: [
+                    { rank: 1, name: 'O. Lopez', team: 'MIA', teamId: 146, value: '.340' },
+                    { rank: 2, name: 'J. Lee', team: 'SF', teamId: 137, value: '.333' },
+                    { rank: 3, name: 'Y. Diaz', team: 'TB', teamId: 139, value: '.331' },
+                    { rank: 4, name: 'Y. Alvarez', team: 'HOU', teamId: 117, value: '.322' },
+                    { rank: 5, name: 'B. Marsh', team: 'PHI', teamId: 143, value: '.321' }
+                ],
+                hr: [
+                    { rank: 1, name: 'K. Schwarber', team: 'PHI', teamId: 143, value: '22' },
+                    { rank: 2, name: 'Y. Alvarez', team: 'HOU', teamId: 117, value: '20' },
+                    { rank: 2, name: 'M. Murakami', team: 'NYY', teamId: 147, value: '20' },
+                    { rank: 4, name: 'B. Buxton', team: 'MIN', teamId: 142, value: '18' },
+                    { rank: 5, name: 'B. Rice', team: 'NYY', teamId: 147, value: '17' }
+                ],
+                rbi: [
+                    { rank: 1, name: 'A. Pages', team: 'LAD', teamId: 119, value: '58' },
+                    { rank: 1, name: 'J. Walker', team: 'STL', teamId: 138, value: '58' },
+                    { rank: 3, name: 'C. Abrams', team: 'WSH', teamId: 120, value: '57' },
+                    { rank: 3, name: 'A. Burleson', team: 'STL', teamId: 138, value: '57' },
+                    { rank: 5, name: 'N. Kurtz', team: 'ATH', teamId: 133, value: '55' }
+                ],
+                hits: [
+                    { rank: 1, name: 'O. Lopez', team: 'MIA', teamId: 146, value: '107' },
+                    { rank: 2, name: 'L. Arraez', team: 'SF', teamId: 137, value: '96' },
+                    { rank: 3, name: 'Y. Diaz', team: 'TB', teamId: 139, value: '95' },
+                    { rank: 4, name: 'Y. Alvarez', team: 'HOU', teamId: 117, value: '94' },
+                    { rank: 5, name: 'J. Lee', team: 'SF', teamId: 137, value: '90' }
+                ],
+                sb: [
+                    { rank: 1, name: 'N. Nunez', team: 'WSH', teamId: 120, value: '31' },
+                    { rank: 2, name: 'B. Witt Jr.', team: 'KC', teamId: 118, value: '28' },
+                    { rank: 3, name: 'J. Ramirez', team: 'CLE', teamId: 114, value: '24' },
+                    { rank: 4, name: 'J. Chisholm Jr.', team: 'NYY', teamId: 147, value: '23' },
+                    { rank: 5, name: 'O. Cruz', team: 'PIT', teamId: 134, value: '21' }
+                ]
+            };
+
+            const datosPitcheo = {
+                era: [
+                    { rank: 1, name: 'J. Misiorowski', team: 'MIL', teamId: 158, value: '1.45' },
+                    { rank: 2, name: 'C. Schlittler', team: 'NYY', teamId: 147, value: '1.71' },
+                    { rank: 3, name: 'C. Sanchez', team: 'PHI', teamId: 143, value: '1.80' },
+                    { rank: 4, name: 'C. Burns', team: 'CIN', teamId: 113, value: '2.00' },
+                    { rank: 5, name: 'C. Sale', team: 'ATL', teamId: 144, value: '2.14' }
+                ],
+                sv: [
+                    { rank: 1, name: 'C. Smith', team: 'CLE', teamId: 114, value: '24' },
+                    { rank: 2, name: 'M. Miller', team: 'SD', teamId: 135, value: '21' },
+                    { rank: 3, name: 'B. Baker', team: 'TB', teamId: 139, value: '20' },
+                    { rank: 4, name: 'R. O\'Brien', team: 'STL', teamId: 138, value: '19' },
+                    { rank: 4, name: 'J. Duran', team: 'PHI', teamId: 143, value: '19' }
+                ],
+                k: [
+                    { rank: 1, name: 'J. Misiorowski', team: 'MIL', teamId: 158, value: '138' },
+                    { rank: 2, name: 'C. Sanchez', team: 'PHI', teamId: 143, value: '121' },
+                    { rank: 3, name: 'D. Cease', team: 'TOR', teamId: 141, value: '118' },
+                    { rank: 4, name: 'G. Williams', team: 'CLE', teamId: 114, value: '111' },
+                    { rank: 5, name: 'J. Luzardo', team: 'PHI', teamId: 143, value: '110' }
+                ],
+                w: [
+                    { rank: 1, name: 'A. Ashby', team: 'MIL', teamId: 158, value: '10' },
+                    { rank: 2, name: 'C. Sanchez', team: 'PHI', teamId: 143, value: '9' },
+                    { rank: 2, name: 'G. Williams', team: 'CLE', teamId: 114, value: '9' },
+                    { rank: 2, name: 'D. Martin', team: 'CHW', teamId: 145, value: '9' },
+                    { rank: 2, name: 'J. Wrobleski', team: 'LAD', teamId: 119, value: '9' }
+                ],
+                qs: [
+                    { rank: 1, name: 'S. Alcantara', team: 'MIA', teamId: 146, value: '12' },
+                    { rank: 1, name: 'C. Sanchez', team: 'PHI', teamId: 143, value: '12' },
+                    { rank: 3, name: 'M. Wacha', team: 'KC', teamId: 118, value: '11' },
+                    { rank: 3, name: 'S. Ohtani', team: 'LAD', teamId: 119, value: '11' },
+                    { rank: 3, name: 'Y. Yamamoto', team: 'LAD', teamId: 119, value: '11' }
+                ]
+            };
+
+            function renderTablaLideres(datos, contenedorId) {
+                const cont = document.getElementById(contenedorId);
+                if (!cont) return;
+                if (!datos || datos.length === 0) {
+                    cont.innerHTML = `<p class="text-center text-gray-500 dark:text-gray-400">No hay datos disponibles.</p>`;
+                    return;
+                }
+                let html = `<table class="w-full text-xs tabla-lideres dark:text-gray-300">
+                    <thead><tr><th>#</th><th class="text-left">Jugador</th><th>Equipo</th><th>Valor</th></tr></thead><tbody>`;
+                datos.forEach(item => {
+                    const name = sanitizar(item.name);
+                    const team = sanitizar(item.team);
+                    const teamId = item.teamId;
+                    const logo = teamId ? `<img src="https://www.mlbstatic.com/team-logos/${teamId}.svg" alt="${escaparHTML(team)}" class="w-5 h-5 inline-block mr-1" onerror="this.style.display='none'" loading="lazy">` : '';
+                    html += `<tr>
+                        <td class="ranking">${item.rank}</td>
+                        <td class="text-left font-medium">${name}</td>
+                        <td>${logo} ${team}</td>
+                        <td>${item.value}</td>
+                    </tr>`;
+                });
+                html += `</tbody></table>`;
+                cont.innerHTML = html;
+            }
+
+            function cargarEstadisticasManual() {
+                const subBateo = document.querySelector('#stats-bateo .sub-tab-link.active');
+                if (subBateo) {
+                    const categoria = subBateo.dataset.sub;
+                    const targetId = 'sub-' + categoria;
+                    const datos = datosBateo[categoria] || [];
+                    renderTablaLideres(datos, targetId);
+                }
+
+                const subPitcheo = document.querySelector('#stats-pitcheo .sub-tab-link.active');
+                if (subPitcheo) {
+                    const categoria = subPitcheo.dataset.sub;
+                    const targetId = 'sub-' + categoria;
+                    const datos = datosPitcheo[categoria] || [];
+                    renderTablaLideres(datos, targetId);
+                }
+            }
+
+            // ============================================================
+            // 6. JUGADORES DESTACADOS - CON LOGOS DE EQUIPOS
+            // ============================================================
+            function cargarJugadoresManual() {
+                const cont = document.getElementById('contenedor-jugadores');
+                if (!cont) return;
+                const tipo = document.querySelector('#seccion-jugadores .sub-tab-link.active')?.dataset.jugador || 'bateo';
+                cont.innerHTML = '<div class="spinner"></div>';
+
+                setTimeout(() => {
+                    let datos = [];
+                    if (tipo === 'bateo') {
+                        datos = [
+                            { name: 'K. Schwarber', team: 'PHI', teamId: 143, value: '22 HR' },
+                            { name: 'Y. Alvarez', team: 'HOU', teamId: 117, value: '20 HR' },
+                            { name: 'M. Murakami', team: 'NYY', teamId: 147, value: '20 HR' },
+                            { name: 'O. Lopez', team: 'MIA', teamId: 146, value: '.340' },
+                            { name: 'B. Marsh', team: 'PHI', teamId: 143, value: '.321' }
+                        ];
+                    } else {
+                        datos = [
+                            { name: 'J. Misiorowski', team: 'MIL', teamId: 158, value: '1.45 ERA' },
+                            { name: 'C. Sanchez', team: 'PHI', teamId: 143, value: '1.80 ERA' },
+                            { name: 'C. Smith', team: 'CLE', teamId: 114, value: '24 SV' },
+                            { name: 'M. Miller', team: 'SD', teamId: 135, value: '21 SV' },
+                            { name: 'S. Ohtani', team: 'LAD', teamId: 119, value: '11 QS' }
+                        ];
+                    }
+
+                    let html = `<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">`;
+                    datos.forEach(item => {
+                        const name = sanitizar(item.name);
+                        const team = sanitizar(item.team);
+                        const teamId = item.teamId;
+                        const logo = teamId ? `<img src="https://www.mlbstatic.com/team-logos/${teamId}.svg" alt="${escaparHTML(team)}" class="team-logo-jugador" onerror="this.style.display='none'" loading="lazy">` : '';
+                        html += `
+                            <div class="bg-white/30 dark:bg-gray-800/30 rounded-xl p-4 text-center transition hover:scale-105 border border-white/20 dark:border-gray-700/30">
+                                ${logo}
+                                <p class="font-bold text-sm dark:text-white mt-1">${name}</p>
+                                <p class="text-xs text-gray-500 dark:text-gray-400">${team}</p>
+                                <div class="mt-2 text-sm font-semibold text-azul dark:text-azulClaro bg-azul/10 dark:bg-azul/20 px-2 py-1 rounded-full inline-block">${item.value}</div>
+                            </div>
+                        `;
+                    });
+                    html += `</div>`;
+                    cont.innerHTML = html;
+                }, 300);
+            }
+
+            document.querySelectorAll('#seccion-jugadores .sub-tab-link').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('#seccion-jugadores .sub-tab-link').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    window.cargarJugadoresManual();
+                });
+            });
+
+            // ============================================================
+            // 7. NOTICIAS - TEMPORADA 2026
+            // ============================================================
+            function cargarNoticiasManual() {
+                const cont = document.getElementById('contenedor-noticias');
+                if (!cont) return;
+                cont.innerHTML = '<div class="spinner"></div>';
+
+                const noticias = [
+                    {
+                        categoria: '🔥 Jonrones',
+                        fecha: '25 de junio, 2026',
+                        titulo: 'Kyle Schwarber lidera la MLB con 22 cuadrangulares',
+                        resumen: 'El toletero de los Phillies se mantiene como el líder absoluto en la carrera por los jonrones, seguido de cerca por Yordan Alvarez (20) y Munetaka Murakami (20).'
+                    },
+                    {
+                        categoria: '⭐ Juego de Estrellas',
+                        fecha: '24 de junio, 2026',
+                        titulo: 'Shohei Ohtani y Yordan Alvarez asegurados como titulares',
+                        resumen: 'Ambos jugadores han recibido el mayor número de votos en sus respectivas ligas y serán titulares en el Juego de Estrellas 2026.'
+                    },
+                    {
+                        categoria: '🇨🇦 Azulejos',
+                        fecha: '23 de junio, 2026',
+                        titulo: 'Vladimir Guerrero Jr. con inicio lento en la temporada',
+                        resumen: 'El dominicano de los Azulejos apenas suma 3 cuadrangulares en lo que va de temporada, lo que mantiene al equipo en la búsqueda de su mejor versión.'
+                    },
+                    {
+                        categoria: '🏆 Serie Mundial',
+                        fecha: '22 de junio, 2026',
+                        titulo: 'Los Dodgers de Los Ángeles lideran las apuestas',
+                        resumen: 'El equipo con la mejor plantilla de la liga es el favorito para llevarse el título de la Serie Mundial 2026 según las casas de apuestas.'
+                    },
+                    {
+                        categoria: '🌎 Clásico Mundial',
+                        fecha: '21 de junio, 2026',
+                        titulo: 'Selección de EE.UU. confirma a sus primeras estrellas',
+                        resumen: 'La selección estadounidense ha confirmado a sus primeras estrellas para el Clásico Mundial de Béisbol 2026, con grandes nombres de la MLB.'
+                    }
+                ];
+
+                setTimeout(() => {
+                    let html = '';
+                    noticias.forEach(n => {
+                        html += `
+                            <div class="glass-card rounded-xl p-4 transition-all noticia-card">
+                                <div class="flex flex-wrap items-start justify-between gap-2 mb-1">
+                                    <span class="categoria">${n.categoria}</span>
+                                    <span class="fecha">${n.fecha}</span>
+                                </div>
+                                <h4 class="font-bold text-base dark:text-white">${sanitizar(n.titulo)}</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-300 mt-1">${sanitizar(n.resumen)}</p>
+                                <a href="#" class="text-azul dark:text-blue-400 text-xs font-medium hover:underline mt-2 inline-block">Leer más →</a>
+                            </div>
+                        `;
+                    });
+                    cont.innerHTML = html;
+                }, 300);
+            }
+
+            // ============================================================
+            // 8. EQUIPOS
+            // ============================================================
+            async function cargarEquiposMLB() {
+                const cont = document.getElementById('contenedor-equipos');
+                if (!cont) return;
+                cont.innerHTML = '<div class="spinner"></div>';
+                try {
+                    const url = 'https://statsapi.mlb.com/api/v1/teams?sportId=1';
+                    const res = await fetch(url);
+                    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                    const data = await res.json();
+                    const teams = data.teams || [];
+                    if (!teams.length) {
+                        cont.innerHTML = `<p class="text-center text-gray-500 dark:text-gray-400">No se encontraron equipos.</p>`;
+                        return;
+                    }
+                    let html = `<div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3">`;
+                    teams.slice(0, 30).forEach(team => {
+                        const name = sanitizar(team.name);
+                        const id = team.id;
+                        const logo = id ? `<img src="https://www.mlbstatic.com/team-logos/${id}.svg" alt="${escaparHTML(name)}" class="w-12 h-12 mx-auto object-contain" onerror="this.style.display='none'" loading="lazy">` : '';
+                        html += `
+                            <div class="bg-white/30 dark:bg-gray-800/30 rounded-xl p-3 text-center transition hover:scale-105">
+                                ${logo}
+                                <p class="text-xs font-medium mt-1 dark:text-white">${name}</p>
+                            </div>
+                        `;
+                    });
+                    html += `</div>`;
+                    cont.innerHTML = html;
+                } catch (error) {
+                    console.error('Error cargando equipos:', error);
+                    cont.innerHTML = `<p class="text-center text-red-600 dark:text-red-400">Error al cargar equipos.</p>`;
+                }
+            }
+
+            // ============================================================
+            // 9. PLAYOFFS
+            // ============================================================
+            async function cargarPlayoffs() {
+                const cont = document.getElementById('contenedor-playoffs');
+                if (!cont) return;
+                cont.innerHTML = '<div class="spinner"></div>';
+                const anio = new Date().getFullYear();
+                const fecha = window.obtenerFechaHoy();
+                const url = `https://statsapi.mlb.com/api/v1/standings?season=${anio}&leagueId=103,104&date=${fecha}&division=all`;
+                try {
+                    const res = await fetch(url);
+                    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                    const data = await res.json();
+                    const records = data.records || [];
+                    if (!records.length) {
+                        cont.innerHTML = `<p class="text-center text-gray-500 dark:text-gray-400">No hay datos de playoffs disponibles.</p>`;
+                        return;
+                    }
+                    const ligas = { '103': 'Liga Americana', '104': 'Liga Nacional' };
+                    let html = '';
+                    for (const leagueId of ['103', '104']) {
+                        const registrosLiga = records.filter(r => r.league?.id == leagueId);
+                        if (!registrosLiga.length) continue;
+                        html += `<h4 class="font-bold text-mlbAzul dark:text-white mt-4 mb-2">${ligas[leagueId]}</h4>`;
+                        registrosLiga.sort((a, b) => a.division?.name?.localeCompare(b.division?.name || '') || 0);
+                        for (const division of registrosLiga) {
+                            const divName = sanitizar(division.division?.name || 'División');
+                            const teams = division.teamRecords || [];
+                            teams.sort((a, b) => (parseInt(a.divisionRank) || 99) - (parseInt(b.divisionRank) || 99));
+                            html += `
+                                <div class="division-titulo dark:bg-gray-700 dark:text-gray-300">${divName}</div>
+                                <table class="w-full text-xs tabla-posiciones dark:text-gray-300">
+                                    <thead><tr>
+                                        <th class="text-left">Equipo</th>
+                                        <th class="text-center">Pos</th>
+                                        <th class="text-center">G</th>
+                                        <th class="text-center">P</th>
+                                        <th class="text-center">PCT</th>
+                                        <th class="text-center">DIV</th>
+                                        <th class="text-center">WC</th>
+                                        <th class="text-center">Clasificación</th>
+                                    </tr></thead>
+                                    <tbody>
+                            `;
+                            for (const team of teams) {
+                                const name = sanitizar(team.team?.name || 'Desconocido');
+                                const teamId = team.team?.id;
+                                const pos = team.divisionRank || '-';
+                                const wins = team.leagueRecord?.wins || 0;
+                                const losses = team.leagueRecord?.losses || 0;
+                                const pct = team.leagueRecord?.pct ? parseFloat(team.leagueRecord.pct).toFixed(3) : '.000';
+                                const divGB = team.gamesBack !== undefined && team.gamesBack !== null ? team.gamesBack : '-';
+                                const wcGB = team.wildCardGamesBack !== undefined && team.wildCardGamesBack !== null ? team.wildCardGamesBack : '-';
+                                let clasificacion = 'Eliminado', indicador = 'eliminado';
+                                if (pos === '1') { clasificacion = 'Líder división'; indicador = 'lider'; }
+                                else if (wcGB !== '-' && parseFloat(wcGB) <= 2.5) { clasificacion = 'Wild Card'; indicador = 'wildcard'; }
+                                const logo = teamId ? `<img src="https://www.mlbstatic.com/team-logos/${teamId}.svg" alt="${escaparHTML(name)}" class="w-5 h-5 inline-block mr-1" onerror="this.style.display='none'" loading="lazy">` : '';
+                                html += `
+                                    <tr>
+                                        <td class="text-left font-medium">${logo} ${name}</td>
+                                        <td class="text-center font-bold">${pos}</td>
+                                        <td class="text-center">${wins}</td>
+                                        <td class="text-center">${losses}</td>
+                                        <td class="text-center">${pct}</td>
+                                        <td class="text-center">${divGB}</td>
+                                        <td class="text-center">${wcGB}</td>
+                                        <td class="text-center"><span class="playoff-indicador ${indicador}"></span> ${clasificacion}</td>
+                                    </tr>
+                                `;
+                            }
+                            html += `</tbody></table>`;
+                        }
+                    }
+                    cont.innerHTML = html;
+                } catch (error) {
+                    console.error('Error cargando playoffs:', error);
+                    cont.innerHTML = `<p class="text-center text-red-600 dark:text-red-400">Error al cargar playoffs.</p>`;
+                }
+            }
+
+            // ============================================================
+            // 10. PARTIDOS Y FECHAS
+            // ============================================================
+            const ZONA_LIMA = 'America/Lima';
+
+            function hoyLima() {
+                const hoy = new Date();
+                const fechaStr = hoy.toLocaleDateString('en-CA', { timeZone: ZONA_LIMA });
+                return new Date(fechaStr + 'T00:00:00');
+            }
+
+            let fechaActual = hoyLima();
+            let fechaCalendario = hoyLima();
+
+            function iso(d) { return d.toISOString().split('T')[0]; }
+            function obtenerFechaHoy() { return iso(hoyLima()); }
+            function textoFecha(d) {
+                const dias = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
+                const meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+                return `${dias[d.getDay()]} ${d.getDate()} ${meses[d.getMonth()]}`;
+            }
+
+            function cambiarFecha(delta) {
+                fechaActual.setDate(fechaActual.getDate() + delta);
+                mostrarFechas();
+                cargarPartidos(iso(fechaActual));
+            }
+            function irFecha(fechaStr) {
+                fechaActual = new Date(fechaStr + 'T00:00:00');
+                mostrarFechas();
+                cargarPartidos(fechaStr);
+            }
+            function mostrarFechas() {
+                const cont = document.getElementById('selector-fechas');
+                if (!cont) return;
+                let html = '';
+                for (let i = -1; i <= 1; i++) {
+                    let f = new Date(fechaActual);
+                    f.setDate(f.getDate() + i);
+                    const activo = iso(f) === iso(fechaActual);
+                    html += `<span class="px-3 py-1.5 rounded-lg cursor-pointer text-sm ${activo ? 'bg-azul text-white font-semibold shadow-md' : 'hover:bg-white/30 dark:hover:bg-gray-700/30 transition'}" data-fecha="${iso(f)}">${textoFecha(f)}</span>`;
+                }
+                cont.innerHTML = html;
+                cont.querySelectorAll('[data-fecha]').forEach(el => {
+                    el.addEventListener('click', function() { irFecha(this.dataset.fecha); });
+                });
+            }
+
+            function cambiarFechaCalendario(delta) {
+                fechaCalendario.setDate(fechaCalendario.getDate() + delta);
+                mostrarFechasCalendario();
+                cargarPartidosCalendario(iso(fechaCalendario));
+            }
+            function irFechaCalendario(fechaStr) {
+                fechaCalendario = new Date(fechaStr + 'T00:00:00');
+                mostrarFechasCalendario();
+                cargarPartidosCalendario(fechaStr);
+            }
+            function mostrarFechasCalendario() {
+                const cont = document.getElementById('selector-fechas-calendario');
+                if (!cont) return;
+                let html = '';
+                for (let i = -1; i <= 1; i++) {
+                    let f = new Date(fechaCalendario);
+                    f.setDate(f.getDate() + i);
+                    const activo = iso(f) === iso(fechaCalendario);
+                    html += `<span class="px-3 py-1.5 rounded-lg cursor-pointer text-sm ${activo ? 'bg-azul text-white font-semibold shadow-md' : 'hover:bg-white/30 dark:hover:bg-gray-700/30 transition'}" data-fecha="${iso(f)}">${textoFecha(f)}</span>`;
+                }
+                cont.innerHTML = html;
+                cont.querySelectorAll('[data-fecha]').forEach(el => {
+                    el.addEventListener('click', function() { irFechaCalendario(this.dataset.fecha); });
+                });
+            }
+
+            // ============================================================
+            // 11. AUXILIARES PARTIDOS
+            // ============================================================
+            function obtenerTotales(linescore, boxscore, esVisitante) {
+                if (linescore?.teams) {
+                    const eq = esVisitante ? linescore.teams.away : linescore.teams.home;
+                    if (eq?.runs !== undefined) return { runs: eq.runs || 0, hits: eq.hits || 0, errors: eq.errors || 0 };
+                }
+                if (boxscore?.teams) {
+                    const eqBox = esVisitante ? boxscore.teams.away : boxscore.teams.home;
+                    if (eqBox?.stats) return { runs: eqBox.stats.runs || 0, hits: eqBox.stats.hits || 0, errors: eqBox.stats.errors || 0 };
+                }
+                return { runs: 0, hits: 0, errors: 0 };
+            }
+
+            function leerEntradas(linescore, boxscore, esVisitante) {
+                const innings = linescore?.innings || [];
+                const fila = [];
+                for (let i = 0; i < 9; i++) {
+                    const inn = innings[i];
+                    fila.push(inn ? (esVisitante ? inn.away?.runs : inn.home?.runs) ?? '-' : '-');
+                }
+                const totals = obtenerTotales(linescore, boxscore, esVisitante);
+                return { fila, C: totals.runs, H: totals.hits, E: totals.errors };
+            }
+
+            function dibujarBases(offense) {
+                const b1 = offense?.first || false, b2 = offense?.second || false, b3 = offense?.third || false;
+                return `<div class="relative w-16 h-16 mx-auto">
+                    <div class="diamante-base absolute top-0 left-1/2 -translate-x-1/2 ${b2 ? 'ocupada' : 'vacia'}"></div>
+                    <div class="diamante-base absolute bottom-1/2 right-0 translate-y-1/2 ${b1 ? 'ocupada' : 'vacia'}"></div>
+                    <div class="diamante-base absolute bottom-1/2 left-0 translate-y-1/2 ${b3 ? 'ocupada' : 'vacia'}"></div>
+                    <div class="diamante-base absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 plato"></div>
+                </div>`;
+            }
+
+            // ============================================================
+            // 12. CARGAR PARTIDOS
+            // ============================================================
+            async function cargarPartidos(fecha) {
+                const cont = document.getElementById('lista-partidos');
+                if (!cont) return;
+                cont.innerHTML = '<div class="flex justify-center py-10"><div class="spinner"></div></div>';
+                try {
+                    const url = `https://statsapi.mlb.com/api/v1/schedule?sportId=1&date=${fecha}&language=es&hydrate=linescore,probablePitchers,status,linescore.offense,linescore.defense,boxscore,gameDate,plays`;
+                    const res = await fetch(url);
+                    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                    const datos = await res.json();
+                    const juegos = datos.dates?.[0]?.games || [];
+                    if (!juegos.length) {
+                        cont.innerHTML = `<p class="text-center py-8 text-gray-500 dark:text-gray-400">No hay partidos programados para esta fecha</p>`;
+                        return;
+                    }
+                    let html = '';
+                    for (const p of juegos) html += generarTarjetaPartido(p);
+                    cont.innerHTML = html;
+                } catch (error) {
+                    console.error('Error cargando partidos:', error);
+                    cont.innerHTML = `<p class="text-center text-red-600 dark:text-red-400 py-8">Error al cargar partidos.</p>`;
+                }
+            }
+
+            async function cargarPartidosCalendario(fecha) {
+                const cont = document.getElementById('lista-partidos-calendario');
+                if (!cont) return;
+                cont.innerHTML = '<div class="flex justify-center py-10"><div class="spinner"></div></div>';
+                try {
+                    const url = `https://statsapi.mlb.com/api/v1/schedule?sportId=1&date=${fecha}&language=es&hydrate=linescore,probablePitchers,status,linescore.offense,linescore.defense,boxscore,gameDate,plays`;
+                    const res = await fetch(url);
+                    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                    const datos = await res.json();
+                    const juegos = datos.dates?.[0]?.games || [];
+                    if (!juegos.length) {
+                        cont.innerHTML = `<p class="text-center py-8 text-gray-500 dark:text-gray-400">No hay partidos programados para esta fecha</p>`;
+                        return;
+                    }
+                    let html = '';
+                    for (const p of juegos) html += generarTarjetaPartido(p);
+                    cont.innerHTML = html;
+                } catch (error) {
+                    console.error('Error cargando partidos calendario:', error);
+                    cont.innerHTML = `<p class="text-center text-red-600 dark:text-red-400 py-8">Error al cargar partidos.</p>`;
+                }
+            }
+
+            function generarTarjetaPartido(p) {
+                const away = p.teams?.away || {}, home = p.teams?.home || {};
+                const idA = away.team?.id, idH = home.team?.id;
+                const nomA = sanitizar(away.team?.name || 'Visitante'), nomH = sanitizar(home.team?.name || 'Local');
+                const regA = away.leagueRecord ? `${away.leagueRecord.wins}-${away.leagueRecord.losses}` : '';
+                const regH = home.leagueRecord ? `${home.leagueRecord.wins}-${home.leagueRecord.losses}` : '';
+                const estado = p.status || {};
+                const vivo = estado.abstractGameState === 'Live';
+                const final = estado.abstractGameState === 'Final';
+                const programado = estado.abstractGameState === 'Preview';
+                const horaUTC = new Date(p.gameDate);
+                const horaLocal = new Date(horaUTC.getTime() - 5 * 3600000);
+                const horaTexto = horaLocal.toLocaleTimeString('es-PE', { hour: '2-digit', minute: '2-digit', hour12: true });
+                const ls = p.linescore || {}, box = p.boxscore || {};
+                const v = leerEntradas(ls, box, true), h = leerEntradas(ls, box, false);
+                const actInn = ls.currentInning || '', mitad = ls.inningHalf === 'Top' ? 'Arriba' : ls.inningHalf === 'Bottom' ? 'Abajo' : '';
+                const bol = ls.balls ?? '-', str = ls.strikes ?? '-', out = ls.outs ?? '-';
+                const tipo = p.seriesDescription || 'Temporada Regular';
+                let lanzA = p.probablePitchers?.away || {}, lanzH = p.probablePitchers?.home || {};
+                if (!lanzA.fullName && box?.teams?.away?.players) {
+                    const pitcher = Object.values(box.teams.away.players).find(pj => pj.position?.code === 'P');
+                    if (pitcher) lanzA = { fullName: pitcher.person?.fullName, era: pitcher.stats?.era };
+                }
+                if (!lanzH.fullName && box?.teams?.home?.players) {
+                    const pitcher = Object.values(box.teams.home.players).find(pj => pj.position?.code === 'P');
+                    if (pitcher) lanzH = { fullName: pitcher.person?.fullName, era: pitcher.stats?.era };
+                }
+                if (!lanzA.fullName) lanzA.fullName = vivo ? 'En vivo' : 'Por confirmar';
+                if (!lanzH.fullName) lanzH.fullName = vivo ? 'En vivo' : 'Por confirmar';
+
+                let estadoTexto = '', estadoClase = '';
+                if (vivo) { estadoTexto = `EN VIVO ${actInn}° ${mitad}`; estadoClase = 'bg-rojoVivo'; }
+                else if (final) { estadoTexto = 'FINAL'; estadoClase = 'bg-gray-500'; }
+                else if (programado) { estadoTexto = horaTexto; estadoClase = 'bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300'; }
+
+                const logoA = idA ? `<img src="https://www.mlbstatic.com/team-logos/${idA}.svg" alt="${escaparHTML(nomA)}" class="w-10 h-10 object-contain" onerror="this.style.display='none'" loading="lazy">` : `<div class="w-10 h-10 bg-gray-200 dark:bg-gray-700 rounded-full"></div>`;
+                const logoH = idH ? `<img src="https://www.mlbstatic.com/team-logos/${idH}.svg" alt="${escaparHTML(nomH)}" class="w-10 h-10 object-contain" onerror="this.style.display='none'" loading="lazy">` : `<div class="w-10 h-10 bg-gray-200 dark:bg-gray-700 rounded-full"></div>`;
+
+                return `
+                <div class="glass-card rounded-xl p-4 relative animate-slide-up transition-all">
+                    ${estadoTexto ? `<span class="absolute top-3 right-3 ${estadoClase} text-white text-[0.65rem] px-2 py-0.5 rounded-full shadow-md">${estadoTexto}</span>` : ''}
+                    <div class="text-center text-xs text-gray-500 dark:text-gray-400 mb-3">${tipo}</div>
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-3">
+                            ${logoA}
+                            <div><div class="font-bold text-base dark:text-white">${nomA}</div><div class="text-xs text-gray-500 dark:text-gray-400">${regA}</div></div>
+                        </div>
+                        <div class="text-3xl font-bold min-w-[4rem] text-center dark:text-white">${v.C} - ${h.C}</div>
+                        <div class="flex items-center gap-3 text-right flex-row-reverse">
+                            ${logoH}
+                            <div><div class="font-bold text-base dark:text-white">${nomH}</div><div class="text-xs text-gray-500 dark:text-gray-400">${regH}</div></div>
+                        </div>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <div class="grid grid-entradas gap-x-1 text-xs text-center font-medium text-gray-500 dark:text-gray-400">
+                            ${[1,2,3,4,5,6,7,8,9].map(n => `<span>${n}</span>`).join('')}
+                            <span class="border-l border-white/20 dark:border-gray-700/30">C</span><span>H</span><span>E</span>
+                        </div>
+                        <div class="grid grid-entradas gap-x-1 text-xs text-center py-1 border-t border-white/20 dark:border-gray-700/30 mt-1 dark:text-gray-300">
+                            ${v.fila.map(x => `<span>${x}</span>`).join('')}
+                            <span class="font-bold border-l border-white/20 dark:border-gray-700/30">${v.C}</span><span class="font-bold">${v.H}</span><span class="font-bold">${v.E}</span>
+                        </div>
+                        <div class="grid grid-entradas gap-x-1 text-xs text-center py-1 dark:text-gray-300">
+                            ${h.fila.map(x => `<span>${x}</span>`).join('')}
+                            <span class="font-bold border-l border-white/20 dark:border-gray-700/30">${h.C}</span><span class="font-bold">${h.H}</span><span class="font-bold">${h.E}</span>
+                        </div>
+                    </div>
+                    ${vivo ? `
+                    <div class="mt-3 flex flex-col sm:flex-row items-center justify-around text-xs bg-white/30 dark:bg-gray-800/30 rounded-lg py-2 px-3 gap-2">
+                        <div class="text-center"><span class="font-medium dark:text-white">B ${bol} • S ${str} • O ${out}</span><div class="text-[0.55rem] text-gray-500 dark:text-gray-400">Bolas • Strikes • Outs</div></div>
+                        ${dibujarBases(ls.offense)}
+                    </div>` : ''}
+                    <div class="mt-4 grid grid-cols-2 gap-2 text-xs">
+                        <div><div class="text-gray-500 dark:text-gray-400">Lanzando</div><div class="font-medium dark:text-white">${sanitizar(lanzA.fullName)}</div>${lanzA.era ? `<div class="text-gray-500 dark:text-gray-400">${lanzA.era} EFE</div>` : ''}</div>
+                        <div class="text-right"><div class="text-gray-500 dark:text-gray-400">Al bate</div><div class="font-medium dark:text-white">${sanitizar(lanzH.fullName)}</div>${lanzH.era ? `<div class="text-gray-500 dark:text-gray-400">${lanzH.era} EFE</div>` : ''}</div>
+                    </div>
+                    <div class="mt-3 flex justify-around text-xs font-medium text-azul dark:text-blue-400">
+                        <a href="https://www.mlb.com/es/gameday/${p.gamePk}" target="_blank" rel="noopener noreferrer" class="hover:underline">Gameday</a>
+                        <a href="#" class="hover:underline">Crónica</a>
+                    </div>
+                </div>`;
+            }
+
+            // ============================================================
+            // 13. POSICIONES
+            // ============================================================
+            async function cargarPosicionesAPI() {
+                const cont = document.getElementById('contenedor-posiciones');
+                if (!cont) return;
+                cont.innerHTML = '<div class="flex justify-center py-10"><div class="spinner"></div></div>';
+                const fechaStr = obtenerFechaHoy();
+                const anio = new Date().getFullYear();
+                const url = `https://statsapi.mlb.com/api/v1/standings?season=${anio}&leagueId=103,104&date=${fechaStr}&division=all`;
+                try {
+                    const res = await fetch(url);
+                    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                    const data = await res.json();
+                    const records = data.records || [];
+                    if (!records.length) {
+                        cont.innerHTML = `<p class="text-center text-gray-500 dark:text-gray-400">No hay datos de posiciones disponibles.</p>`;
+                        return;
+                    }
+                    const ligas = { '103': 'Liga Americana', '104': 'Liga Nacional' };
+                    let html = '';
+                    for (const leagueId of ['103', '104']) {
+                        const registrosLiga = records.filter(r => r.league?.id == leagueId);
+                        if (!registrosLiga.length) continue;
+                        html += `
+                            <div class="glass-card rounded-xl p-4 transition-all">
+                                <h3 class="font-semibold text-mlbAzul dark:text-white text-lg mb-3 flex items-center gap-2">🏆 ${ligas[leagueId]}</h3>
+                                <div class="overflow-x-auto">
+                        `;
+                        registrosLiga.sort((a, b) => a.division?.name?.localeCompare(b.division?.name || '') || 0);
+                        for (const division of registrosLiga) {
+                            const divName = sanitizar(division.division?.name || 'División');
+                            const teams = division.teamRecords || [];
+                            teams.sort((a, b) => (parseInt(a.divisionRank) || 99) - (parseInt(b.divisionRank) || 99));
+                            html += `
+                                <div class="division-titulo dark:bg-gray-700 dark:text-gray-300">${divName}</div>
+                                <table class="w-full text-xs tabla-posiciones dark:text-gray-300">
+                                    <thead><tr>
+                                        <th class="text-left">Equipo</th>
+                                        <th class="text-center">G</th>
+                                        <th class="text-center">P</th>
+                                        <th class="text-center">PCT</th>
+                                        <th class="text-center">DIF</th>
+                                        <th class="text-center">DIF WC</th>
+                                    </tr></thead>
+                                    <tbody>
+                            `;
+                            for (const team of teams) {
+                                const name = sanitizar(team.team?.name || 'Desconocido');
+                                const teamId = team.team?.id;
+                                const wins = team.leagueRecord?.wins || 0;
+                                const losses = team.leagueRecord?.losses || 0;
+                                const pct = team.leagueRecord?.pct ? parseFloat(team.leagueRecord.pct).toFixed(3) : '.000';
+                                const gamesBack = team.gamesBack !== undefined && team.gamesBack !== null ? team.gamesBack : '-';
+                                const wcGamesBack = team.wildCardGamesBack !== undefined && team.wildCardGamesBack !== null ? team.wildCardGamesBack : '-';
+                                const difWC = team.divisionRank === '1' ? '-' : wcGamesBack !== '-' ? wcGamesBack : '-';
+                                const logo = teamId ? `<img src="https://www.mlbstatic.com/team-logos/${teamId}.svg" alt="${escaparHTML(name)}" class="w-6 h-6 inline-block mr-1" onerror="this.style.display='none'" loading="lazy">` : '';
+                                html += `
+                                    <tr>
+                                        <td class="text-left font-medium">${logo} ${name}</td>
+                                        <td class="text-center">${wins}</td>
+                                        <td class="text-center">${losses}</td>
+                                        <td class="text-center">${pct}</td>
+                                        <td class="text-center">${gamesBack}</td>
+                                        <td class="text-center">${difWC}</td>
+                                    </tr>
+                                `;
+                            }
+                            html += `</tbody></table>`;
+                        }
+                        html += `</div></div>`;
+                    }
+                    cont.innerHTML = html;
+                } catch (error) {
+                    console.error('Error cargando posiciones:', error);
+                    cont.innerHTML = `
+                        <div class="bg-red-50/50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-6 text-center">
+                            <p class="text-red-600 dark:text-red-400">Error al cargar las posiciones.</p>
+                            <button onclick="window.cargarPosicionesAPI()" class="btn-recargar mt-2">Reintentar</button>
+                        </div>
+                    `;
+                }
+            }
+
+            // ============================================================
+            // 14. EXPONER FUNCIONES GLOBALES
+            // ============================================================
+            window.cambiarFecha = cambiarFecha;
+            window.irFecha = irFecha;
+            window.obtenerFechaHoy = obtenerFechaHoy;
+            window.cargarPosicionesAPI = cargarPosicionesAPI;
+            window.cargarEstadisticasManual = cargarEstadisticasManual;
+            window.cargarJugadoresManual = cargarJugadoresManual;
+            window.cargarEquiposMLB = cargarEquiposMLB;
+            window.cargarPlayoffs = cargarPlayoffs;
+            window.cargarNoticiasManual = cargarNoticiasManual;
+            window.cambiarFechaCalendario = cambiarFechaCalendario;
+            window.irFechaCalendario = irFechaCalendario;
+            window.mostrarFechasCalendario = mostrarFechasCalendario;
+            window.cargarPartidosCalendario = cargarPartidosCalendario;
+
+            // ============================================================
+            // 15. INICIALIZACIÓN
+            // ============================================================
+            mostrarFechas();
+            cargarPartidos(iso(fechaActual));
+            mostrarFechasCalendario();
+            cargarPartidosCalendario(iso(fechaCalendario));
+
+            // Cargar datos iniciales
+            setTimeout(() => {
+                cargarEstadisticasManual();
+                cargarJugadoresManual();
+                cargarNoticiasManual();
+            }, 500);
+
+            document.getElementById('btnSeguridad')?.addEventListener('click', function() {
+                alert('🔒 Conexión segura (HTTPS)\n✅ CSP activo\n✅ Sanitización de entrada\n✅ Protección XSS');
+            });
+
+        })();
+    </script>
+</body>
 </html>
